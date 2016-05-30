@@ -4,6 +4,7 @@ defmodule Elmer.Mixfile do
   def project do
     [app: :elmer,
      name: "Elmer",
+     description: "Helper mix tasks for generating elm files like Main, Ports, Models, Msgs, etc.",
      source_url: "https://github.com/nathanjohnson320/elmer",
      package: package,
      version: "0.0.1",
