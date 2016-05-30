@@ -5,6 +5,7 @@ defmodule Elmer.Mixfile do
     [app: :elmer,
      name: "Elmer",
      source_url: "https://github.com/nathanjohnson320/elmer",
+     package: package,
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
@@ -31,5 +32,13 @@ defmodule Elmer.Mixfile do
   defp deps do
     [{:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}]
+  end
+
+  defp package do
+    [# These are the default files included in the package
+      name: :elmer,
+      maintainers: ["Nathan Johnson"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/nathanjohnson320/elmer"}]
   end
 end
