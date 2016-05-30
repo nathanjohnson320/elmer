@@ -1,6 +1,26 @@
 defmodule Mix.Tasks.Elmer.Create do
+  @shortdoc "Creates new elm applications"
+  @moduledoc """
+  This is a mix task for creating new elm applications.
+  """
+
   use Mix.Task
 
+  @doc """
+  Creates a new elm application in directory specified by the user.
+
+  Run with `mix elmer.create`
+
+  Different types of apps can be generated:
+
+  * Beginner (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram)
+  * HTML (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program)
+  * Navigation (http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program)
+
+  These types correspond to the main types of elm programs.
+
+
+  """
   def run(_args) do
     Mix.shell.info "Creating new elm app..."
 

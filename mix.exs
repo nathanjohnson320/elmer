@@ -3,6 +3,8 @@ defmodule Elmer.Mixfile do
 
   def project do
     [app: :elmer,
+     name: "Elmer",
+     source_url: "https://github.com/nathanjohnson320/elmer",
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
@@ -27,6 +29,7 @@ defmodule Elmer.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:earmark, "~> 0.1", only: :dev},
+     {:ex_doc, "~> 0.11", only: :dev}]
   end
 end
