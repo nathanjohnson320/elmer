@@ -7,7 +7,7 @@ defmodule Elmer.Mixfile do
      description: "Helper mix tasks for generating elm files like Main, Ports, Models, Msgs, etc.",
      source_url: "https://github.com/nathanjohnson320/elmer",
      package: package,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
