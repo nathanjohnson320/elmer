@@ -4,6 +4,9 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Models exposing (AppModel, initialModel)
+import View exposing (view)
+import Update exposing (update)
+import Msgs exposing (..)
 
 
 main =
@@ -15,12 +18,8 @@ main =
         }
 
 
-type alias AppModel =
-    {}
-
-
-init : String -> ( AppModel, Cmd Msg )
-init topic =
+init : ( AppModel, Cmd Msg )
+init =
     let
         cmds =
             []
@@ -28,7 +27,7 @@ init topic =
         cmd =
             Cmd.batch cmds
     in
-        (Models.initialModel cmd)
+        ( Models.initialModel, cmd )
 
 
 

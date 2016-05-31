@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, Attribute, div)
+import Html exposing (Html, Attribute, div, text)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import String
@@ -44,4 +44,4 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [] []
+    div [] [ text "Hello, world!" ]

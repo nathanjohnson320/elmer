@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Elmer.Create do
+defmodule Mix.Tasks.Elmer.New do
   @shortdoc "Creates new elm applications"
   @moduledoc """
   This is a mix task for creating new elm applications.
@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Elmer.Create do
   @doc """
   Creates a new elm application in directory specified by the user.
 
-  Run with `mix elmer.create`
+  Run with `mix elmer.new`
 
   Different types of apps can be generated:
 
@@ -51,12 +51,32 @@ defmodule Mix.Tasks.Elmer.Create do
 
     # Map of the available templates
     templates = %{
-      "b" => Path.expand("./templates/b/beginnerprogram.elm") |> File.read!,
-      "h" => Path.expand("./templates/h/htmlprogram.elm") |> File.read!,
-      "n" => Path.expand("./templates/n/navigationprogram.elm") |> File.read!
+      "b" => [{Path.expand("./templates/b/beginnerprogram.elm"), "Main.elm"},
+              {Path.expand("./templates/b/elm-package.json"), "elm-package.json"}
+             ],
+      "h" => [{Path.expand("./templates/h/htmlprogram.elm"), "Main.elm"},
+              {Path.expand("./templates/h/models.elm"), "Models.elm"},
+              {Path.expand("./templates/h/msgs.elm"), "Msgs.elm"},
+              {Path.expand("./templates/h/view.elm"), "View.elm"},
+              {Path.expand("./templates/h/update.elm"), "Update.elm"},
+              {Path.expand("./templates/h/elm-package.json"), "elm-package.json"}
+             ],
+      "n" => [{Path.expand("./templates/n/navigationprogram.elm"), "Main.elm"},
+              {Path.expand("./templates/n/models.elm"), "Models.elm"},
+              {Path.expand("./templates/n/msgs.elm"), "Msgs.elm"},
+              {Path.expand("./templates/n/ports.elm"), "Ports.elm"},
+              {Path.expand("./templates/n/routemsgs.elm"), "RouteMsgs.elm"},
+              {Path.expand("./templates/n/routing.elm"), "Routing.elm"},
+              {Path.expand("./templates/n/update.elm"), "Update.elm"},
+              {Path.expand("./templates/n/view.elm"), "View.elm"},
+              {Path.expand("./templates/n/elm-package.json"), "elm-package.json"}
+             ]
     }
 
     # Write the template to our app dir
-    File.write "#{path}/Main.elm", templates[type]
+    Enum.each templates[type], fn({template, filename}) ->
+      contents = File.read!(template)
+      File.write("#{path}/#{filename}", contents)
+    end
   end
 end
