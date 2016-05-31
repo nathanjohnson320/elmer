@@ -13,9 +13,26 @@ defmodule Mix.Tasks.Elmer.New do
 
   Different types of apps can be generated:
 
-  * Beginner (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram)
-  * HTML (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program)
-  * Navigation (http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program)
+  * Beginner (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram) which generates:
+      * Main.elm
+      * elm-package.json
+  * HTML (http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program) which generates:
+      * Main.elm
+      * Models.elm
+      * Msgs.elm
+      * Update.elm
+      * View.elm
+      * elm-package.json
+  * Navigation (http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program) which generates:
+      * Main.elm
+      * Models.elm
+      * Msgs.elm
+      * Ports.elm
+      * RouteMsgs.elm
+      * Routing.Elm
+      * Update.elm
+      * View.elm
+      * elm-package.json
 
   These types correspond to the main types of elm programs.
 
