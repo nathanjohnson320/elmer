@@ -5,9 +5,9 @@ module Msgs exposing (..)
 
 
 type Msg
-    = NoOp
-<%= Enum.map @messages, fn(msg) -> %>
-| <%= msg["msg"] %><%= Enum.map msg["params"], fn(param) -> %><%= param %> <% end %><% end %>
+\s\s\s\s= NoOp
+<%= Enum.map @messages, fn(msg) -> %>\s\s\s\s| <%= msg["msg"] %> <%= Enum.map msg["params"], fn(param) -> %><%= param %> <% end %>
+<% end %>
     """
   end
 end

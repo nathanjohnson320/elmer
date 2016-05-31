@@ -23,7 +23,10 @@ defmodule Mix.Tasks.Elmer.Gen.Msg do
       [msg_spec | params] = String.split(msg, ":")
       %{"msg" => msg_spec, "params" => params}
     end
-    IO.inspect EEx.eval_file(Path.expand("./templates/eex/msg.eex"), assigns: [messages: messages])
+    output = EEx.eval_string(Elmer.Templates.render_msgs(), assigns: [messages: messages])
+
+    # Write the output
+    Mix.Generator.create_file(Path.expand("./Msgs.elm"), output)
 
     # If msg is not specified then we let the user know, otherwise we generate the output file
     # if is_nil(options.msg), do: Mix.shell.info "msg is required with optional parameters, ex: --msg CreatePlayer:String:String:Int UpdatePlayer:PlayerId:Player", else do: generate_message(opts)
