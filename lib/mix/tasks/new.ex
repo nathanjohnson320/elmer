@@ -68,31 +68,31 @@ defmodule Mix.Tasks.Elmer.New do
 
     # Map of the available templates
     templates = %{
-      "b" => [{Path.expand("./templates/b/beginnerprogram.elm"), "Main.elm"},
-              {Path.expand("./templates/b/elm-package.json"), "elm-package.json"}
+      "b" => [{&Elmer.Templates.Beginner.render_main/0, "Main.elm"},
+              {&Elmer.Templates.Beginner.render_package_json/0, "elm-package.json"}
              ],
-      "h" => [{Path.expand("./templates/h/htmlprogram.elm"), "Main.elm"},
-              {Path.expand("./templates/h/models.elm"), "Models.elm"},
-              {Path.expand("./templates/h/msgs.elm"), "Msgs.elm"},
-              {Path.expand("./templates/h/view.elm"), "View.elm"},
-              {Path.expand("./templates/h/update.elm"), "Update.elm"},
-              {Path.expand("./templates/h/elm-package.json"), "elm-package.json"}
+      "h" => [{&Elmer.Templates.Html.render_main/0, "Main.elm"},
+              {&Elmer.Templates.Html.render_models/0, "Models.elm"},
+              {&Elmer.Templates.Html.render_msgs/0, "Msgs.elm"},
+              {&Elmer.Templates.Html.render_view/0, "View.elm"},
+              {&Elmer.Templates.Html.render_update/0, "Update.elm"},
+              {&Elmer.Templates.Html.render_package_json/0, "elm-package.json"}
              ],
-      "n" => [{Path.expand("./templates/n/navigationprogram.elm"), "Main.elm"},
-              {Path.expand("./templates/n/models.elm"), "Models.elm"},
-              {Path.expand("./templates/n/msgs.elm"), "Msgs.elm"},
-              {Path.expand("./templates/n/ports.elm"), "Ports.elm"},
-              {Path.expand("./templates/n/routemsgs.elm"), "RouteMsgs.elm"},
-              {Path.expand("./templates/n/routing.elm"), "Routing.elm"},
-              {Path.expand("./templates/n/update.elm"), "Update.elm"},
-              {Path.expand("./templates/n/view.elm"), "View.elm"},
-              {Path.expand("./templates/n/elm-package.json"), "elm-package.json"}
+      "n" => [{&Elmer.Templates.Html.render_main/0, "Main.elm"},
+              {&Elmer.Templates.Html.render_models/0, "Models.elm"},
+              {&Elmer.Templates.Html.render_msgs/0, "Msgs.elm"},
+              {&Elmer.Templates.Html.render_ports/0, "Ports.elm"},
+              {&Elmer.Templates.Html.render_routemsgs/0, "RouteMsgs.elm"},
+              {&Elmer.Templates.Html.render_routing/0, "Routing.elm"},
+              {&Elmer.Templates.Html.render_update/0, "Update.elm"},
+              {&Elmer.Templates.Html.render_view/0, "View.elm"},
+              {&Elmer.Templates.Html.render_package_json/0, "elm-package.json"}
              ]
     }
 
     # Write the template to our app dir
     Enum.each templates[type], fn({template, filename}) ->
-      contents = File.read!(template)
+      contents = template.()
       Mix.Generator.create_file("#{path}/#{filename}", contents)
     end
   end

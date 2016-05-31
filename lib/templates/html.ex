@@ -1,4 +1,4 @@
-defmodule Elmer.Templates.HTML do
+defmodule Elmer.Templates.Html do
   def render_main do
     """
 module Main exposing (..)
