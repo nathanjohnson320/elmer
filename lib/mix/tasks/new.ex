@@ -93,7 +93,7 @@ defmodule Mix.Tasks.Elmer.New do
     # Write the template to our app dir
     Enum.each templates[type], fn({template, filename}) ->
       contents = File.read!(template)
-      File.write("#{path}/#{filename}", contents)
+      Mix.Generator.create_file("#{path}/#{filename}", contents)
     end
   end
 end
