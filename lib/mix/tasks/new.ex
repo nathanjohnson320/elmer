@@ -42,9 +42,7 @@ defmodule Mix.Tasks.Elmer.New do
     Mix.shell.info "Creating new elm app..."
 
     # Get the path to their app
-    app_path = Mix.shell.prompt("What is the path to your elm app?\n|>")
-    |> String.strip()
-    |> Path.expand()
+    app_path = Elmer.prompt_path
 
     # Make the folder if it doesn't already exist
     case File.mkdir(Path.expand(app_path)) do

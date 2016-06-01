@@ -64,7 +64,7 @@
         Mix.Tasks.Elmer.Gen.Msg
         
         
-          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_msg.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -129,7 +129,7 @@
     </a>
     <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_msg.ex#L24" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -137,7 +137,8 @@
   
   <section class="docstring">
     <p>Creates a new elm Msg in the current directory.</p>
-<p>Run with <code class="inline">mix elmer.gen.msg &lt;args&gt;</code></p>
+<p>Run with <code class="inline">mix elmer.gen.msg &lt;module name&gt; &lt;args&gt;</code></p>
+<p>module name is the module you want to place this Msg in, for example: Players.Striker will create the file <elmpath>/Players/Striker/Msgs.elm</p>
 <p>Args are similar to phoenix gen arguments where they are in the format “MsgName:Type1:Type2:TypeN”</p>
 <ul>
 <li>MsgName is the name of the message you want to generate
@@ -145,8 +146,6 @@
 <li>The types will be entered in exactly as you type them.
 </li>
 <li>You can enter in as many messages as you want as long as they’re separated by a space
-</li>
-<li>Currently there’s no way to set the root elm path so you have to enter it each time you generate.
 </li>
 </ul>
 
