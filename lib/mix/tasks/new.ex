@@ -78,15 +78,15 @@ defmodule Mix.Tasks.Elmer.New do
               {&Elmer.Templates.Html.render_update/0, "Update.elm"},
               {&Elmer.Templates.Html.render_package_json/0, "elm-package.json"}
              ],
-      "n" => [{&Elmer.Templates.Html.render_main/0, "Main.elm"},
-              {&Elmer.Templates.Html.render_models/0, "Models.elm"},
-              {&Elmer.Templates.Html.render_msgs/0, "Msgs.elm"},
-              {&Elmer.Templates.Html.render_ports/0, "Ports.elm"},
-              {&Elmer.Templates.Html.render_routemsgs/0, "RouteMsgs.elm"},
-              {&Elmer.Templates.Html.render_routing/0, "Routing.elm"},
-              {&Elmer.Templates.Html.render_update/0, "Update.elm"},
-              {&Elmer.Templates.Html.render_view/0, "View.elm"},
-              {&Elmer.Templates.Html.render_package_json/0, "elm-package.json"}
+      "n" => [{&Elmer.Templates.Navigation.render_main/0, "Main.elm"},
+              {&Elmer.Templates.Navigation.render_models/0, "Models.elm"},
+              {&Elmer.Templates.Navigation.render_msgs/0, "Msgs.elm"},
+              {&Elmer.Templates.Navigation.render_ports/0, "Ports.elm"},
+              {&Elmer.Templates.Navigation.render_routemsgs/0, "RouteMsgs.elm"},
+              {&Elmer.Templates.Navigation.render_routing/0, "Routing.elm"},
+              {&Elmer.Templates.Navigation.render_update/0, "Update.elm"},
+              {&Elmer.Templates.Navigation.render_view/0, "View.elm"},
+              {&Elmer.Templates.Navigation.render_package_json/0, "elm-package.json"}
              ]
     }
 

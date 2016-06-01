@@ -1,7 +1,7 @@
 defmodule Elmer.Templates.Beginner do
   def render_main do
   """
-  module Main exposing (..)
+module Main exposing (..)
 
 import Html exposing (Html, Attribute, div, text)
 import Html.App as Html
@@ -48,7 +48,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [] [ text "Hello, world!" ]
-    """
+"""
   end
 
   def render_package_json do
@@ -59,7 +59,7 @@ view model =
   "repository": "https://github.com/user/project.git",
   "license": "BSD3",
   "source-directories": [
-    "."        
+    "."
   ],
   "exposed-modules": [],
   "dependencies": {
@@ -68,6 +68,6 @@ view model =
   },
   "elm-version": "0.17.0 <= v < 0.18.0" 
 }
-   """
+"""
   end
 end

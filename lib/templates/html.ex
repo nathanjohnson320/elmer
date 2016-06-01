@@ -51,7 +51,7 @@ subscriptions model =
   "repository": "https://github.com/user/project.git",
   "license": "BSD3",
   "source-directories": [
-    "."        
+    "."
   ],
   "exposed-modules": [],
   "dependencies": {
@@ -75,7 +75,7 @@ type alias AppModel =
 initialModel : AppModel
 initialModel =
     {}
-    """
+"""
   end
 
   def render_msgs do
@@ -85,7 +85,7 @@ module Msgs exposing (..)
 
 type Msg
     = NoOp
-    """
+"""
   end
 
   def render_update do
@@ -101,7 +101,7 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
-  """
+"""
   end
 
   def render_view do
@@ -119,6 +119,6 @@ view : AppModel -> Html Msg
 view model =
     div []
         [ text "Hello, World!" ]
-    """
+"""
   end
 end

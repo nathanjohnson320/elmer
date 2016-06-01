@@ -28,7 +28,6 @@ defmodule Mix.Tasks.Elmer.Gen.Msg do
     # Write the output
     Mix.Generator.create_file(Path.expand("./Msgs.elm"), output)
 
-    # If msg is not specified then we let the user know, otherwise we generate the output file
-    # if is_nil(options.msg), do: Mix.shell.info "msg is required with optional parameters, ex: --msg CreatePlayer:String:String:Int UpdatePlayer:PlayerId:Player", else do: generate_message(opts)
+    IO.inspect Path.wildcard("**/elm-package.json")
   end
 end

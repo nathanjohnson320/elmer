@@ -48,7 +48,7 @@ main =
   "repository": "https://github.com/user/project.git",
   "license": "BSD3",
   "source-directories": [
-    "."        
+    "."
   ],
   "exposed-modules": [],
   "dependencies": {
@@ -56,11 +56,11 @@ main =
     "elm-lang/html": "1.0.0 <= v < 2.0.0",
     "elm-lang/navigation": "1.0.0 <= v < 2.0.0",
     "evancz/elm-http": "3.0.1 <= v < 4.0.0",
-    "evancz/url-parser": "1.0.0 <= v < 2.0.0" 
+    "evancz/url-parser": "1.0.0 <= v < 2.0.0"
   },
   "elm-version": "0.17.0 <= v < 0.18.0" 
 }
-    """
+"""
   end
 
   def render_models do
@@ -81,17 +81,17 @@ initialModel =
     { page = Index
     , query = ""
     }
-    """
+"""
   end
 
   def render_msgs do
-    """
+"""
 module Msgs exposing (..)
 
 
 type Msg
     = NoOp
-    """
+"""
   end
 
   def render_ports do
@@ -107,7 +107,7 @@ subscriptions model =
     Sub.batch
         [ Sub.none
         ]
-    """
+"""
   end
 
   def render_routemsgs do
@@ -117,7 +117,7 @@ module RouteMsgs exposing (..)
 
 type Page
     = Index
-    """
+"""
   end
 
   def render_routing do
@@ -169,7 +169,7 @@ toHash page =
 hashParser : Navigation.Location -> Result String Page
 hashParser location =
     UrlParser.parse identity pageParser (String.dropLeft 1 location.hash)
-    """
+"""
   end
 
   def render_update do
@@ -185,10 +185,10 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
-    """
+"""
   end
 
-  def render_update do
+  def render_view do
     """
 module View exposing (..)
 
@@ -204,6 +204,6 @@ view : AppModel -> Html Msg
 view model =
     div []
         [ text "Hello, World!" ]
-    """
+"""
   end
 end
