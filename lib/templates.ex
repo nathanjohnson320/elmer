@@ -1,7 +1,7 @@
 defmodule Elmer.Templates do
   def render_msgs do
     """
-module Msgs exposing (..)
+module <%= Enum.join(@modulename, ".")%>.Msgs exposing (..)
 
 
 type Msg
