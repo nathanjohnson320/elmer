@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Elmer.Gen.Msg do
   use Mix.Task
 
   @doc """
-  Creates a new elm Msg in the current directory.
+  Creates a new elm Msg in the directory corresponding to your <module name>.
 
   Run with `mix elmer.gen.msg <module name> <args>`
 

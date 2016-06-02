@@ -10,4 +10,18 @@ type Msg
 <% end %>
     """
   end
+
+  def render_model do
+    """
+module <%= @modulename %>.Models exposing (..)
+
+type alias <%= @model_name %> =
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> : <%= field["type"] %>
+<% end %>    }
+
+new : <%= @model_name %>
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> : <%= field["default_value"] %>
+<% end %>    }
+"""
+  end
 end
