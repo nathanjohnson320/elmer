@@ -16,3 +16,12 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [{:elmer, "~> 0.0.1", only: :dev}]
         end
 
+# V1 Roadmap
+ - ~~Msg generator~~
+ - ~~View generator~~
+ - ~~Model generator~~
+ - Update generator
+ - Cmd generator
+ - Port generator
+ - Resource generator (Msg, View, Model, Update)
+ - Phoenix resource generator (Resource + phoenix gen.json for API)
