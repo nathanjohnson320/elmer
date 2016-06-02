@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>Mix.Tasks.Elmer.New – Elmer v0.0.5</title>
+    <title>Mix.Tasks.Elmer.Gen.View – Elmer v0.0.5</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">Elmer v0.0.5</small>
-        Mix.Tasks.Elmer.New
+        Mix.Tasks.Elmer.Gen.View
         
         
-          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/new.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_view.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +72,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>This is a mix task for creating new elm applications.</p>
+          <p>This is a mix task for creating a View template.</p>
 
         </section>
       
@@ -97,7 +97,7 @@
     <a href="#run/1">run(args)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Creates a new elm application in directory specified by the user</p>
+    <div class="summary-synopsis"><p>Creates a new elm View in your elm path</p>
 </div>
   
 </div>
@@ -129,65 +129,15 @@
     </a>
     <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/new.ex#L41" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_view.ex#L15" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    <p>Creates a new elm application in directory specified by the user.</p>
-<p>Run with <code class="inline">mix elmer.new</code></p>
-<p>Different types of apps can be generated:</p>
-<ul>
-<li><p>Beginner (<a href="http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram">http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram</a>) which generates:</p>
-<ul>
-<li>Main.elm
-</li>
-<li>elm-package.json
-</li>
-</ul>
-</li>
-<li><p>HTML (<a href="http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program">http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program</a>) which generates:</p>
-<ul>
-<li>Main.elm
-</li>
-<li>Models.elm
-</li>
-<li>Msgs.elm
-</li>
-<li>Update.elm
-</li>
-<li>View.elm
-</li>
-<li>elm-package.json
-</li>
-</ul>
-</li>
-<li><p>Navigation (<a href="http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program">http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program</a>) which generates:</p>
-<ul>
-<li>Main.elm
-</li>
-<li>Models.elm
-</li>
-<li>Msgs.elm
-</li>
-<li>Ports.elm
-</li>
-<li>RouteMsgs.elm
-</li>
-<li>Routing.Elm
-</li>
-<li>Update.elm
-</li>
-<li>View.elm
-</li>
-<li>elm-package.json
-</li>
-</ul>
-</li>
-</ul>
-<p>These types correspond to the main types of elm programs.</p>
+    <p>Creates a new elm View in your elm path.</p>
+<p>Run with <code class="inline">mix elmer.gen.view &lt;module name&gt;</code></p>
 
   </section>
 </div>
