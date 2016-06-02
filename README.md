@@ -5,20 +5,14 @@ Elmer is a toolchain for generating elm code inside of an elixir app. Could also
 
 ## Installation
 
-Install globall with
-`mix archive.install https://github.com/nathanjohnson320/elmer/blob/master/archives/elmer-0.0.3.ez?raw=true`
+Add :elmer, elmroot: "path to my elm root folder" to your config. Then use mix tasts to generate apps, msgs, models, etc.
+
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add elmer to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:elmer, "~> 0.0.1"}]
-        end
-
-  2. Ensure elmer is started before your application:
-
-        def application do
-          [applications: [:elmer]]
+          [{:elmer, "~> 0.0.1", only: :dev}]
         end
 
