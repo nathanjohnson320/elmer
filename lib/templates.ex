@@ -27,7 +27,7 @@ new : <%= @model_name %>
 
   def render_view do
     """
-module <%= @module_name %> exposing (..)
+module <%= @module_name %>.View exposing (..)
 
 import Html exposing (..)
 import Html.App as App
@@ -40,6 +40,24 @@ view : AppModel -> Html Msg
 view model =
     div []
         [ text "Hello, World!" ]
+"""
+  end
+
+  def render_update do
+    """
+module <%= @module_name %>.Update exposing (..)
+
+import <%= @module_name %>.Models exposing (..)
+import <%= @module_name %>.Msgs exposing (..)
+
+
+update : Msg -> AppModel -> ( AppModel, Cmd Msg )
+update msg model =
+    case msg of
+<%= Enum.map @clauses, fn(clause) -> %>        <%= clause["msg"] %><%= Enum.map clause["params"], fn(param) -> %> <%= param %><% end %> ->
+            ( model, Cmd.none )
+
+<% end %>
 """
   end
 end

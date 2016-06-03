@@ -20,7 +20,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
  - ~~Msg generator~~
  - ~~View generator~~
  - ~~Model generator~~
- - Update generator
+ - ~~Update generator~~
  - Cmd generator
  - Port generator
  - Resource generator (Msg, View, Model, Update)

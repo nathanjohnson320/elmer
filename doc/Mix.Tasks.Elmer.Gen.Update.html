@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>Elmer.Templates.Beginner – Elmer v0.0.7</title>
+    <title>Mix.Tasks.Elmer.Gen.Update – Elmer v0.0.7</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,15 +61,20 @@
 
       <h1>
         <small class="visible-xs">Elmer v0.0.7</small>
-        Elmer.Templates.Beginner
+        Mix.Tasks.Elmer.Gen.Update
         
         
-          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/templates/beginner.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_update.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
       </h1>
 
+      
+        <section id="moduledoc" class="docstring">
+          <p>This is a mix task for creating an Update template.</p>
+
+        </section>
       
 
       
@@ -89,14 +94,11 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#render_main/0">render_main()</a>
+    <a href="#run/1">run(args)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Creates a new Update file in your elm path</p>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#render_package_json/0">render_package_json()</a>
-  </div>
   
 </div>
 
@@ -120,38 +122,25 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="render_main/0">
+          <div class="detail" id="run/1">
   <div class="detail-header">
-    <a href="#render_main/0" class="detail-link" title="Link to this function">
+    <a href="#run/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">render_main()</span>
+    <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/templates/beginner.ex#L2" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_update.ex#L19" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="render_package_json/0">
-  <div class="detail-header">
-    <a href="#render_package_json/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">render_package_json()</span>
-      
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/templates/beginner.ex#L54" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    
+    <p>Creates a new Update file in your elm path.</p>
+<p>Run with <code class="inline">mix elmer.gen.update &lt;module name&gt; &lt;args&gt;</code></p>
+<p>Args are in the format “Msg2:param1:param2 MsgN:paramN”</p>
+<p>By default all update clauses will return (model, Cmd.none), this may change in the future.</p>
+
   </section>
 </div>
 
