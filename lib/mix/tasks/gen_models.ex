@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Elmer.Gen.Model do
 
   # Map of ecto to Elm types
   @type_map %{
-    "boolean" => "Boolean",
+    "boolean" => "Bool",
     "integer" => "Int",
     "float"   => "Float",
     "string"  => "String",
@@ -29,7 +29,7 @@ defmodule Mix.Tasks.Elmer.Gen.Model do
   Creates a new elm Model in your elm path.
 
   Run with `mix elmer.gen.model <module name> <args>`
-  
+
   Args are similar to phoenix gen arguments where they are in the format "Model field1:type1 fieldN:typeN"
 
   * Model is the name of the model you want to generate

@@ -15,13 +15,48 @@ type Msg
     """
 module <%= @modulename %>.Models exposing (..)
 
+import Json.Decode as Decode exposing ((:=))
+import Json.Encode as Encode
+
+
+-- Model Declaration
+
+
 type alias <%= @model_name %> =
 <%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> : <%= field["type"] %>
 <% end %>    }
 
+
+
+-- New Model
+
+
 new : <%= @model_name %>
+new =
 <%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> : <%= field["default_value"] %>
 <% end %>    }
+
+
+
+-- JSON Decoder
+
+
+<%= String.downcase(@model_name) %>Decoder : Decode.Decoder <%= @model_name %>
+<%= String.downcase(@model_name) %>Decoder =
+    Decode.object<%= length(@fields) %> <%= @model_name %>
+<%= Enum.map @fields, fn(field) -> %>        ("<%= field["field"]%>" := Decode.<%= String.downcase(field["type"]) %>)
+<% end %>
+
+
+-- JSON Encoder
+
+
+<%= String.downcase(@model_name) %>Encoded : <%= @model_name %> -> Encode.Value
+<%= String.downcase(@model_name) %>Encoded model =
+    Encode.object
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>        <%= if index == 0 do %>[<%= else %>,<% end %> ( "<%= field["field"] %>", Encode.<%= String.downcase(field["type"]) %> model.<%= field["field"] %> )
+<% end %>        ]
+
 """
   end
 
