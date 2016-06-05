@@ -1,4 +1,7 @@
 defmodule Elmer.Templates.Navigation do
+  @moduledoc """
+  Renders an elm-html application with navigation. Use this if you want to build a single page application. Documentation here: http://package.elm-lang.org/packages/elm-lang/navigation/1.0.0/Navigation#program
+  """
   def render_main do
   """
 module Main exposing (..)

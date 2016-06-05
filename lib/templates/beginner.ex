@@ -1,4 +1,8 @@
 defmodule Elmer.Templates.Beginner do
+  @moduledoc """
+  Renders a beginnerprogram application. See here http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#beginnerProgram
+  """
+
   def render_main do
   """
 module Main exposing (..)

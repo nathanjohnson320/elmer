@@ -1,4 +1,7 @@
 defmodule Elmer.Templates do
+  @moduledoc """
+  Contains eex template strings for each of the elm types. Placed templates in heredocs instead of files to avoid cross project/OS file system issues.
+  """
   def render_msgs do
     """
 module <%= @modulename %>.Msgs exposing (..)
@@ -91,6 +94,57 @@ update msg model =
     case msg of
 <%= Enum.map @clauses, fn(clause) -> %>        <%= clause["msg"] %><%= Enum.map clause["params"], fn(param) -> %> <%= param %><% end %> ->
             ( model, Cmd.none )
+
+<% end %>
+"""
+  end
+
+  def render_cmd do
+    """
+module <%= @module_name %>.Cmd exposing (..)
+
+import Platform.Cmd as Cmd exposing (..)
+import Http
+import Task
+import Players.Models exposing (PlayerId, Player)
+import Players.Msgs exposing (..)
+
+<%= case do %>
+create : Player -> Cmd Msg
+create player =
+    let
+        body =
+            memberEncoded player
+                |> Encode.encode 0
+                |> Http.string
+
+        config =
+            { verb = "POST"
+            , headers = [ ( "Content-Type", "application/json" ) ]
+            , url = createUrl
+            , body = body
+            }
+
+        request =
+            Http.send Http.defaultSettings config
+                |> Http.fromJson memberDecoder
+    in
+        Task.perform CreatePlayerError CreatePlayerSuccess (request)
+
+
+createUrl : String
+createUrl =
+    "/players"
+
+
+fetchAll : Cmd Msg
+fetchAll =
+    Task.perform FetchAllError FetchAllSuccess (Http.get collectionDecoder fetchAllUrl)
+
+
+fetchAllUrl : String
+fetchAllUrl =
+    "/players"
 
 <% end %>
 """

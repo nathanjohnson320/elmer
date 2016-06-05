@@ -55,7 +55,7 @@ defmodule Mix.Tasks.Elmer.New do
 
         Mix.shell.info "App created in #{app_path}"
       {:error, :eexist} -> Mix.shell.info "App directory already exists"
-      err -> IO.inspect err
+      err -> Mix.shell.error err
     end
   end
 

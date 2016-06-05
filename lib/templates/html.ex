@@ -1,4 +1,7 @@
 defmodule Elmer.Templates.Html do
+  @moduledoc """
+  Renders an elm-html application using Html.App.Program, documentation here: http://package.elm-lang.org/packages/elm-lang/html/1.0.0/Html-App#program
+  """
   def render_main do
     """
 module Main exposing (..)
