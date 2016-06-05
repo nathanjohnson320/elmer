@@ -106,20 +106,23 @@ module <%= @module_name %>.Cmd exposing (..)
 import Platform.Cmd as Cmd exposing (..)
 import Http
 import Task
-import Players.Models exposing (PlayerId, Player)
-import Players.Msgs exposing (..)
+import <%= @model %>.Models exposing (<%= @model %>, collectionDecoder)
+import <%= @model %>.Msgs exposing (..)
 
-<%= case do %>
-create : Player -> Cmd Msg
-create player =
+<%= Enum.map @cmds, fn(cmd) -> %>
+<%= String.downcase(cmd["cmd"]) %> : <%= Enum.map cmd["params"], fn(param) -> %><%= param %> -><% end %>Cmd Msg
+<%= String.downcase(cmd["cmd"])%> <%= Enum.map cmd["params"], fn(param) -> %><%= String.downcase(param) %><% end %>=
+<%= case cmd["request"] do %>
+<% "GET" -> %>    Task.perform <%= cmd["cmd"] %>Error <%= cmd["cmd"] %>Success (Http.get collectionDecoder <%= String.downcase(cmd["cmd"]) %>Url)
+<% _ -> %>
     let
         body =
-            memberEncoded player
-                |> Encode.encode 0
-                |> Http.string
+            ""
+              |> Encode.encode 0
+              |> Http.string
 
         config =
-            { verb = "POST"
+            { verb = "<%= cmd["request"] %>"
             , headers = [ ( "Content-Type", "application/json" ) ]
             , url = createUrl
             , body = body
@@ -127,25 +130,16 @@ create player =
 
         request =
             Http.send Http.defaultSettings config
-                |> Http.fromJson memberDecoder
+                |> Http.fromJson <%= String.downcase(@model) %>Decoder
     in
         Task.perform CreatePlayerError CreatePlayerSuccess (request)
 
 
-createUrl : String
-createUrl =
-    "/players"
+  <% end %>
 
-
-fetchAll : Cmd Msg
-fetchAll =
-    Task.perform FetchAllError FetchAllSuccess (Http.get collectionDecoder fetchAllUrl)
-
-
-fetchAllUrl : String
-fetchAllUrl =
-    "/players"
-
+<%= String.downcase(cmd["cmd"]) %>Url : String
+<%= String.downcase(cmd["cmd"]) %>Url =
+    ""
 <% end %>
 """
   end

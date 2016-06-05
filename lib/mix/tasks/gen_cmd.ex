@@ -42,12 +42,12 @@ defmodule Mix.Tasks.Elmer.Gen.Cmd do
 
     # Parse out the options
     cmds = Enum.map option_list, fn(msg) ->
-      [cmd, type, req, params] = String.split(msg, ":")
+      [cmd, type, req | params] = String.split(msg, ":")
       %{"cmd" => cmd, "type" => type, "request" => req, "params" => params}
     end
-    output = EEx.eval_string(Elmer.Templates.render_msgs(), assigns: [cmds: cmds, modulename: module, model: model])
+    output = EEx.eval_string(Elmer.Templates.render_cmd(), assigns: [cmds: cmds, module_name: module, model: model])
 
     # Write the output
-    Mix.Generator.create_file(output_directory <> "/Msgs.elm", output)
+    Mix.Generator.create_file(output_directory <> "/Cmds.elm", output)
   end
 end
