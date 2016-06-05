@@ -110,16 +110,15 @@ import <%= @model %>.Models exposing (<%= @model %>, collectionDecoder)
 import <%= @model %>.Msgs exposing (..)
 
 <%= Enum.map @cmds, fn(cmd) -> %>
-<%= String.downcase(cmd["cmd"]) %> : <%= Enum.map cmd["params"], fn(param) -> %><%= param %> -><% end %>Cmd Msg
-<%= String.downcase(cmd["cmd"])%> <%= Enum.map cmd["params"], fn(param) -> %><%= String.downcase(param) %><% end %>=
+<%= String.downcase(cmd["cmd"]) %> : <%= Enum.map cmd["params"], fn(param) -> %><%= param %> -> <% end %>Cmd Msg
+<%= String.downcase(cmd["cmd"])%> <%= Enum.map cmd["params"], fn(param) -> %><%= String.downcase(param) %> <% end %>=
 <%= case cmd["request"] do %>
 <% "GET" -> %>    Task.perform <%= cmd["cmd"] %>Error <%= cmd["cmd"] %>Success (Http.get collectionDecoder <%= String.downcase(cmd["cmd"]) %>Url)
-<% _ -> %>
-    let
+<% _ -> %>    let
         body =
             ""
-              |> Encode.encode 0
-              |> Http.string
+                |> Encode.encode 0
+                |> Http.string
 
         config =
             { verb = "<%= cmd["request"] %>"
@@ -133,9 +132,7 @@ import <%= @model %>.Msgs exposing (..)
                 |> Http.fromJson <%= String.downcase(@model) %>Decoder
     in
         Task.perform CreatePlayerError CreatePlayerSuccess (request)
-
-
-  <% end %>
+<% end %>
 
 <%= String.downcase(cmd["cmd"]) %>Url : String
 <%= String.downcase(cmd["cmd"]) %>Url =
