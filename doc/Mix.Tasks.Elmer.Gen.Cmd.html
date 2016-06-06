@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>Mix.Tasks.Elmer.Gen.Msg – Elmer v0.0.9</title>
+    <title>Mix.Tasks.Elmer.Gen.Cmd – Elmer v0.0.9</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">Elmer v0.0.9</small>
-        Mix.Tasks.Elmer.Gen.Msg
+        Mix.Tasks.Elmer.Gen.Cmd
         
         
-          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_msg.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_cmd.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +72,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>This is a mix task for creating a Msg template.</p>
+          <p>Mix task to generate Cmds.elm files.</p>
 
         </section>
       
@@ -97,7 +97,7 @@
     <a href="#run/1">run(args)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Creates a new elm Msg in the directory corresponding to your <module name></p>
+    <div class="summary-synopsis"><p>Creates a new elm Cmd in the directory corresponding to your <module name></p>
 </div>
   
 </div>
@@ -129,23 +129,23 @@
     </a>
     <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_msg.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_cmd.ex#L24" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    <p>Creates a new elm Msg in the directory corresponding to your <module name>.</p>
-<p>Run with <code class="inline">mix elmer.gen.msg &lt;module name&gt; &lt;args&gt;</code></p>
-<p>module name is the module you want to place this Msg in, for example: Players.Striker will create the file <elmpath>/Players/Striker/Msgs.elm</p>
-<p>Args are similar to phoenix gen arguments where they are in the format “MsgName:Type1:Type2:TypeN”</p>
+    <p>Creates a new elm Cmd in the directory corresponding to your <module name>.</p>
+<p>Run with <code class="inline">mix elmer.gen.cmd &lt;module name&gt; &lt;model&gt; &lt;args&gt;</code></p>
+<p>Currently this module is only setup to handle REST Cmds but in the future it will be able to handle multiple types</p>
+<p>Args are in the format “CmdName:Type:RequestType:FuncParams”</p>
 <ul>
-<li>MsgName is the name of the message you want to generate
+<li>Type is “rest”, for now
 </li>
-<li>The types will be entered in exactly as you type them.
+<li>RequestType is: “GET”, “PATCH”, “POST”, “DELETE”, etc.
 </li>
-<li>You can enter in as many messages as you want as long as they’re separated by a space
+<li>FuncParams are what get plugged into your Cmd function
 </li>
 </ul>
 
