@@ -140,4 +140,24 @@ import <%= @model %>.Msgs exposing (..)
 <% end %>
 """
   end
+
+  def render_port do
+    """
+port module <%= @module_name %>.Ports exposing (..)
+
+<%= Enum.map @ports, fn(port) -> %>
+<%= case port["direction"] do %>
+<% "inbound" -> %>port <%= port["name"] %> : ( <%= Enum.join port["params"], ", " %> -> msg ) -> Sub msg
+<% "outbound" -> %>port <%= port["name"] %> : ( <%= Enum.join port["params"], ", " %> ) -> Cmd msg
+<% end %>
+<% end %>
+subscriptions : AppModel -> Sub Msg
+subscriptions model =
+    Sub.batch
+        [ Sub.none
+<%= Enum.map @ports, fn(port) -> %><%= case port["direction"] do %>
+<% "inbound" -> %>        , <%= port["name"] %> Msg
+<% _ -> %><% end %><% end %>        ]
+"""
+  end
 end
