@@ -16,22 +16,22 @@ defmodule Mix.Tasks.Elmer.Gen.Cmd do
 
   Args are in the format "CmdName:Type:RequestType:FuncParams"
 
+  Example: mix elmer.gen.cmd Players Player CreatePlayer:rest:POST:Player
+
   * Type is "rest", for now
   * RequestType is: "GET", "PATCH", "POST", "DELETE", etc.
   * FuncParams are what get plugged into your Cmd function
 
   """
-  def run(_args) do
+  def run(args) do
     Mix.shell.info "Creating new Cmd..."
 
     # Get the app path
     app_path = Elmer.prompt_path
 
     # Parse CLI options
-    {_, options, _} = OptionParser.parse(System.argv)
-
-    # Remove the mix task "elmer.gen.cmd"
-    [_, module, model | option_list] = options
+    {_, options, _} = OptionParser.parse(args)
+    [module, model | option_list] = options
 
     # Create the output directory from the app_path and parsing the module name
     module_path = String.split(module, ".") |> Path.join()

@@ -21,17 +21,15 @@ defmodule Mix.Tasks.Elmer.Gen.Msg do
   * You can enter in as many messages as you want as long as they're separated by a space
 
   """
-  def run(_args) do
+  def run(args) do
     Mix.shell.info "Creating new elm Msg..."
 
     # Get the app path
     app_path = Elmer.prompt_path
 
     # Parse CLI options into a map so they're easier to deal with
-    {_, options, _} = OptionParser.parse(System.argv)
-
-    # Remove the mix task "elmer.gen.msg"
-    [_, module | option_list] = options
+    {_, options, _} = OptionParser.parse(args)
+    [module | option_list] = options
 
     # Create the output directory from the app_path and parsing the module name
     module_path = String.split(module, ".") |> Path.join()

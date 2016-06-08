@@ -106,8 +106,8 @@ module <%= @module_name %>.Cmd exposing (..)
 import Platform.Cmd as Cmd exposing (..)
 import Http
 import Task
-import <%= @model %>.Models exposing (<%= @model %>, collectionDecoder)
-import <%= @model %>.Msgs exposing (..)
+import <%= @module_name %>.Models exposing (<%= @model %>, collectionDecoder)
+import <%= @module_name %>.Msgs exposing (..)
 
 <%= Enum.map @cmds, fn(cmd) -> %>
 <%= String.downcase(cmd["cmd"]) %> : <%= Enum.map cmd["params"], fn(param) -> %><%= param %> -> <% end %>Cmd Msg
@@ -158,6 +158,42 @@ subscriptions model =
 <%= Enum.map @ports, fn(port) -> %><%= case port["direction"] do %>
 <% "inbound" -> %>        , <%= port["name"] %> Msg
 <% _ -> %><% end %><% end %>        ]
+"""
+  end
+
+  def render_list_view do
+    """
+module <%= @module_name %>.View exposing (..)
+
+import Html exposing (..)
+import Html.App as App
+import Html.Attributes exposing (..)
+import Msgs exposing (..)
+import Models exposing (..)
+
+
+view : AppModel -> Html Msg
+view model =
+    div []
+        [ text "Hello, World!" ]
+"""
+  end
+
+  def render_edit_view do
+    """
+module <%= @module_name %>.View exposing (..)
+
+import Html exposing (..)
+import Html.App as App
+import Html.Attributes exposing (..)
+import Msgs exposing (..)
+import Models exposing (..)
+
+
+view : AppModel -> Html Msg
+view model =
+    div []
+        [ text "Hello, World!" ]
 """
   end
 end

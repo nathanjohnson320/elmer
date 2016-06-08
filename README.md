@@ -25,5 +25,5 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
  - ~~Encoder generator~~
  - ~~Cmd generator~~
  - ~~Port generator~~
- - Resource generator (Msg, View, Model, Update)
+ - ~~Resource generator (Msg, View, Model, Update)~~
  - Phoenix resource generator (Resource + phoenix gen.json for API)
