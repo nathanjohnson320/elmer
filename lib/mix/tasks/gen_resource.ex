@@ -27,14 +27,15 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
   def run(args) do
     Mix.shell.info "Creating new elm Resource..."
 
-    # Generate the model
-    Mix.Task.run "elmer.gen.model", args
-
     # Parse CLI options into a map so they're easier to deal with
-    {_, options, _} = OptionParser.parse(args)
-    [module, model_name | option_list] = options
+    [module, model_name, plural_model | option_list] = args
+    
+    # Generate the model
+    model_args = [ module, model_name ] ++ option_list
+    Mix.Task.run "elmer.gen.model", model_args
 
     # Create the list of args to generate
+    elm_map = Elmer.ecto_elm
     msg_args = [
       module,
       # All the messages we need to generate
@@ -51,7 +52,10 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
       "Delete#{model_name}Error:Http.Error",
       "Save#{model_name}Success:#{model_name}",
       "Save#{model_name}Error:Http.Error"
-    ]
+    ] ++ Enum.map option_list, fn(model) ->
+      [field, type | _] = String.split(model, ":")
+      "Change#{String.capitalize(field)}:Int:#{elm_map[type]}"
+    end
 
     # Generate the message
     Mix.Task.run "elmer.gen.msg", msg_args
@@ -72,7 +76,7 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
     Mix.Task.run "elmer.gen.update", msg_args
 
     # Now render the views
-    Mix.Task.run "elmer.gen.listview"
+    # Mix.Task.run "elmer.gen.list_view"
     
   end
 end
