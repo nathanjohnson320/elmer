@@ -12,4 +12,31 @@ defmodule Elmer do
       Application.get_env(:elmer, :elmpath)
     end
   end
+
+  @doc """
+  Returns a map of ecto types to elm types
+  """
+  def ecto_elm do
+    %{
+      "boolean" => "Bool",
+      "integer" => "Int",
+      "float"   => "Float",
+      "string"  => "String",
+      "map"     => "Record"
+    }
+  end
+
+  @doc """
+  Returns a map of default ecto values
+  """
+  def ecto_defaults do
+    # Map of default values
+    %{
+      "boolean" => "False",
+      "integer" => "0",
+      "float"   => "0.0",
+      "string"  => "\"\"",
+      "map"     => "{}"
+    }
+  end
 end

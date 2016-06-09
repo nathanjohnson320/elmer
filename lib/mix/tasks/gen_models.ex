@@ -5,24 +5,6 @@ defmodule Mix.Tasks.Elmer.Gen.Model do
   This is a mix task for creating a Model template.
   """
 
-  # Map of ecto to Elm types
-  @type_map %{
-    "boolean" => "Bool",
-    "integer" => "Int",
-    "float"   => "Float",
-    "string"  => "String",
-    "map"     => "Record"
-  }
-
-  # Map of default values
-  @value_map %{
-    "boolean" => "False",
-    "integer" => "0",
-    "float"   => "0.0",
-    "string"  => "\"\"",
-    "map"     => "{}"
-  }
-
   use Mix.Task
 
   @doc """
@@ -40,17 +22,12 @@ defmodule Mix.Tasks.Elmer.Gen.Model do
       * :string  -> String
       * :map     -> Record
   """
-  def run(_args) do
+  def run(args) do
     Mix.shell.info "Creating new elm Model..."
 
     # Get the app path
     app_path = Elmer.prompt_path
-
-    # Parse CLI options into a map so they're easier to deal with
-    {_, options, _} = OptionParser.parse(System.argv)
-
-    # Remove the mix task "elmer.gen.model"
-    [_, module, model_name | option_list] = options
+    [module, model_name | option_list] = args
 
     # Create the output directory from the app_path and parsing the module name
     module_path = String.split(module, ".") |> Path.join()
@@ -59,10 +36,13 @@ defmodule Mix.Tasks.Elmer.Gen.Model do
     # If the output directory doesn't exist we'll need to create it
     if not File.exists?(output_directory), do: File.mkdir_p(output_directory)
 
+    elm_map = Elmer.ecto_elm
+    defaults = Elmer.ecto_defaults
+    
     # Parse out the options
     fields = Enum.map option_list, fn(model) ->
       [field, type | _] = String.split(model, ":")
-      %{"field" => field, "type" => @type_map[type], "default_value" => @value_map[type]}
+      %{"field" => field, "type" => elm_map[type], "default_value" => defaults[type]}
     end
 
     output = EEx.eval_string Elmer.Templates.render_model(), assigns: [

@@ -66,6 +66,13 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
       "Delete#{model_name}:rest:DELETE:#{model_name}",
       "Save#{model_name}:rest:PATCH:#{model_name}"
     ]
-    Mix.Task.run "elmer.gen.cmd", cmd_args    
+    Mix.Task.run "elmer.gen.cmd", cmd_args
+
+    # Update args are the same as msg_args
+    Mix.Task.run "elmer.gen.update", msg_args
+
+    # Now render the views
+    Mix.Task.run "elmer.gen.listview"
+    
   end
 end

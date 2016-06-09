@@ -163,37 +163,78 @@ subscriptions model =
 
   def render_list_view do
     """
-module <%= @module_name %>.View exposing (..)
+module <%= @module_name %>.List exposing (..)
 
 import Html exposing (..)
 import Html.App as App
-import Html.Attributes exposing (..)
-import Msgs exposing (..)
-import Models exposing (..)
+import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
+import <%= @module_name %>.Msgs exposing (..)
+import <%= @module_name %>.Models exposing (<%= @model_name %>)
 
 
-view : AppModel -> Html Msg
+type alias ViewModel =
+    { <%= @model_plural %> : List <%= @model_name %>
+    , errorMessage : String
+    }
+
+
+view : ViewModel -> Html Msg
 view model =
     div []
-        [ text "Hello, World!" ]
-"""
-  end
-
-  def render_edit_view do
-    """
-module <%= @module_name %>.View exposing (..)
-
-import Html exposing (..)
-import Html.App as App
-import Html.Attributes exposing (..)
-import Msgs exposing (..)
-import Models exposing (..)
+        [ list model
+        ]
 
 
-view : AppModel -> Html Msg
-view model =
+list : ViewModel -> Html Msg
+list model =
     div []
-        [ text "Hello, World!" ]
+        [ table [ class "table-light" ]
+            [ thead []
+                [ tr []
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>                    <%= if index == 0 do %>[<%= else %>,<% end %> th [] [ text "<%= field["field"] %>" ]
+<% end %>                    ]
+                ]
+            , tbody [] (List.map (<%= String.downcase @model_name %>Row model) model.<%= @model_plural %>)
+            ]
+        ]
+
+
+<%= String.downcase @model_name %>Row : ViewModel -> <%= @model_name %> -> Html Msg
+<%= String.downcase @model_name %>Row model <%= String.downcase @model_name %> =
+    tr []
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>        <%= if index == 0 do %>[<%= else %>,<% end %> td [] [ text <%= String.downcase @model_name %>.<%= field["field"] %> ]
+<% end %>        , td []
+            [ editBtn <%= String.downcase @model_name %>
+            , deleteBtn <%= String.downcase @model_name %>
+            ]
+        ]
+
+
+editBtn : <%= @model_name %> -> Html Msg
+editBtn <%= String.downcase @model_name %> =
+    button
+        [ class "btn regular"
+        , onClick (EditPlayer <%= String.downcase @model_name %>.id)
+        ]
+        [ i [ class "fa fa-pencil mr1" ] [], text "Edit" ]
+
+
+addBtn : ViewModel -> Html Msg
+addBtn model =
+    button [ class "btn", onClick Create<%= @model_name %> ]
+        [ i [ class "fa fa-user-plus mr1" ] []
+        , text "Add <%= String.downcase @model_name %>"
+        ]
+
+
+deleteBtn : <%= @model_name %> -> Html Msg
+deleteBtn <%= String.downcase @model_name %> =
+    button
+        [ class "btn regular mr1"
+        , onClick (Delete<%= @model_name %> <%= String.downcase @model_name %>)
+        ]
+        [ i [ class "fa fa-trash mr1" ] [], text "Delete" ]
 """
   end
 end
