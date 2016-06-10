@@ -76,7 +76,7 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
     Mix.Task.run "elmer.gen.update", msg_args
 
     # Now render the views
-    # Mix.Task.run "elmer.gen.list_view"
+    Mix.Task.run "elmer.gen.list_view", args
     
   end
 end

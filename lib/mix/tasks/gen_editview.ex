@@ -1,24 +1,24 @@
-defmodule Mix.Tasks.Elmer.Gen.ListView do
-  @shortdoc "Generates a View file that renders a list."
+defmodule Mix.Tasks.Elmer.Gen.EditView do
+  @shortdoc "Generates a View file that allows editing a model."
 
   @moduledoc """
-  This is a mix task for creating a ListView template.
+  This is a mix task for creating a EditView template.
   """
 
   use Mix.Task
 
   @doc """
-  Creates a new elm View which renders a list of records in your elm path.
+  Creates a new elm View which has form fields which correspond to.
 
-  Run with `mix elmer.gen.list_view <module name> <model_name> <plural model> <args>`
+  Run with `mix elmer.gen.edit_view <module name> <model_name> <plural model> <args>`
 
-  Example: mix elmer.gen.list_view Players Player players name:string level:integer
+  Example: mix elmer.gen.edit_view Players Player players name:string level:integer
   """
   def run(args) do
     Mix.shell.info "Creating new elm View..."
 
     # Get the app path
-    app_path = Elmer.prompt_path    
+    app_path = Elmer.prompt_path
     [module, model_name, plural_model | params] = args
 
     # Create the output directory from the app_path and parsing the module name
@@ -36,7 +36,7 @@ defmodule Mix.Tasks.Elmer.Gen.ListView do
       %{"field" => field, "type" => elm_map[type], "default_value" => defaults[type]}
     end
 
-    output = EEx.eval_string Elmer.Templates.render_list_view(), assigns: [
+    output = EEx.eval_string Elmer.Templates.render_edit_view(), assigns: [
       model_name: model_name,
       fields: fields,
       module_name: module,
@@ -44,6 +44,6 @@ defmodule Mix.Tasks.Elmer.Gen.ListView do
     ]
 
     # Write the output
-    Mix.Generator.create_file(output_directory <> "/List.elm", output)
+    Mix.Generator.create_file(output_directory <> "/Edit.elm", output)
   end
 end

@@ -182,14 +182,15 @@ type alias ViewModel =
 view : ViewModel -> Html Msg
 view model =
     div []
-        [ list model
+        [ div [] [ text model.errorMessage ]
+        , list model
         ]
 
 
 list : ViewModel -> Html Msg
 list model =
     div []
-        [ table [ class "table-light" ]
+        [ table []
             [ thead []
                 [ tr []
 <%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>                    <%= if index == 0 do %>[<%= else %>,<% end %> th [] [ text "<%= field["field"] %>" ]
@@ -214,16 +215,16 @@ list model =
 editBtn : <%= @model_name %> -> Html Msg
 editBtn <%= String.downcase @model_name %> =
     button
-        [ class "btn regular"
+        [ class ""
         , onClick (EditPlayer <%= String.downcase @model_name %>.id)
         ]
-        [ i [ class "fa fa-pencil mr1" ] [], text "Edit" ]
+        [ i [ class "" ] [], text "Edit" ]
 
 
 addBtn : ViewModel -> Html Msg
 addBtn model =
-    button [ class "btn", onClick Create<%= @model_name %> ]
-        [ i [ class "fa fa-user-plus mr1" ] []
+    button [ class "", onClick Create<%= @model_name %> ]
+        [ i [ class "" ] []
         , text "Add <%= String.downcase @model_name %>"
         ]
 
@@ -231,10 +232,75 @@ addBtn model =
 deleteBtn : <%= @model_name %> -> Html Msg
 deleteBtn <%= String.downcase @model_name %> =
     button
-        [ class "btn regular mr1"
+        [ class ""
         , onClick (Delete<%= @model_name %> <%= String.downcase @model_name %>)
         ]
-        [ i [ class "fa fa-trash mr1" ] [], text "Delete" ]
+        [ i [ class "" ] [], text "Delete" ]
+"""
+  end
+
+  def render_edit_view() do
+    """
+module <%= @module_name %>.Edit exposing (..)
+
+import Html exposing (..)
+import Html.App as App
+import Html.Attributes exposing (class, value, href)
+import Html.Events exposing (onClick, onInput, on)
+import Json.Decode as Json
+import <%= @module_name %>.Msgs exposing (..)
+import <%= @module_name %>.Models exposing (<%= @model_name %>)
+
+
+type alias ViewModel =
+    { player : Player
+    }
+type alias ViewModel =
+    { <%= String.downcase @model_name %> : <%= @model_name %>
+    , errorMessage : String
+    }
+
+onChange : msg -> Attribute msg
+onChange message =
+    on "change" (Json.succeed message)
+
+
+view : ViewModel -> Html Msg
+view model =
+    div []
+        [ div [] [ text model.errorMessage]
+        , form model
+        ]
+
+
+form : ViewModel -> Html Msg
+form model =
+    div []
+        [ formLevel model
+        , formName model
+        ]
+
+
+formName : ViewModel -> Html Msg
+formName model =
+    div
+        [ class ""
+        ]
+        [ div [ class "" ] [ text "Name" ]
+        , div [ class "" ]
+            [ inputName model
+            ]
+        ]
+
+
+inputName : ViewModel -> Html Msg
+inputName model =
+    input
+        [ class ""
+        , value model.player.name
+        , onChange (ChangeName model.player.id)
+        ]
+        []
 """
   end
 end
