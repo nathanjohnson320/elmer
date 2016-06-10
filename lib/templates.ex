@@ -253,12 +253,10 @@ import <%= @module_name %>.Models exposing (<%= @model_name %>)
 
 
 type alias ViewModel =
-    { player : Player
-    }
-type alias ViewModel =
     { <%= String.downcase @model_name %> : <%= @model_name %>
     , errorMessage : String
     }
+
 
 onChange : msg -> Attribute msg
 onChange message =
@@ -268,7 +266,7 @@ onChange message =
 view : ViewModel -> Html Msg
 view model =
     div []
-        [ div [] [ text model.errorMessage]
+        [ div [] [ text model.errorMessage ]
         , form model
         ]
 
@@ -276,31 +274,30 @@ view model =
 form : ViewModel -> Html Msg
 form model =
     div []
-        [ formLevel model
-        , formName model
-        ]
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>        <%= if index == 0 do %>[<%= else %>,<% end %> form<%= String.capitalize(field["field"]) %> model
+<% end %>        ]
 
-
-formName : ViewModel -> Html Msg
-formName model =
-    div
-        [ class ""
-        ]
+<%= Enum.map @fields, fn(field) -> %>
+form<%= String.capitalize(field["field"]) %> : ViewModel -> Html Msg
+form<%= String.capitalize(field["field"]) %> model =
+    div [ class "" ]
         [ div [ class "" ] [ text "Name" ]
         , div [ class "" ]
-            [ inputName model
+            [ input<%= String.capitalize(field["field"]) %> model
             ]
         ]
 
 
-inputName : ViewModel -> Html Msg
-inputName model =
+input<%= String.capitalize(field["field"]) %> : ViewModel -> Html Msg
+input<%= String.capitalize(field["field"]) %> model =
     input
         [ class ""
-        , value model.player.name
-        , onChange (ChangeName model.player.id)
+        , value model.<%= String.downcase @model_name %>.<%= field["field"] %>
+        , onChange (Change<%= String.capitalize(field["field"]) %> model.<%= String.downcase @model_name %>.id)
         ]
         []
+
+<% end %>
 """
   end
 end
