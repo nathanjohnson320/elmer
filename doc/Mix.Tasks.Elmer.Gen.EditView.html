@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>Mix.Tasks.Elmer.Gen.Model – Elmer v0.0.11</title>
+    <title>Mix.Tasks.Elmer.Gen.EditView – Elmer v0.0.11</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">Elmer v0.0.11</small>
-        Mix.Tasks.Elmer.Gen.Model
+        Mix.Tasks.Elmer.Gen.EditView
         
         
-          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_models.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_editview.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +72,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>This is a mix task for creating a Model template.</p>
+          <p>This is a mix task for creating a EditView template.</p>
 
         </section>
       
@@ -97,7 +97,7 @@
     <a href="#run/1">run(args)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Creates a new elm Model in your elm path</p>
+    <div class="summary-synopsis"><p>Creates a new elm View which has form fields which correspond to</p>
 </div>
   
 </div>
@@ -129,34 +129,16 @@
     </a>
     <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_models.ex#L25" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_editview.ex#L17" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    <p>Creates a new elm Model in your elm path.</p>
-<p>Run with <code class="inline">mix elmer.gen.model &lt;module name&gt; &lt;args&gt;</code></p>
-<p>Args are similar to phoenix gen arguments where they are in the format “Model field1:type1 fieldN:typeN”</p>
-<ul>
-<li>Model is the name of the model you want to generate
-</li>
-<li><p>Types will be mapped from elixir (ecto types) to elm</p>
-<ul>
-<li>:boolean -&gt; Boolean
-</li>
-<li>:integer -&gt; Int
-</li>
-<li>:float   -&gt; Float
-</li>
-<li>:string  -&gt; String
-</li>
-<li>:map     -&gt; Record
-</li>
-</ul>
-</li>
-</ul>
+    <p>Creates a new elm View which has form fields which correspond to.</p>
+<p>Run with <code class="inline">mix elmer.gen.edit_view &lt;module name&gt; &lt;model_name&gt; &lt;plural model&gt; &lt;args&gt;</code></p>
+<p>Example: mix elmer.gen.edit_view Players Player players name:string level:integer</p>
 
   </section>
 </div>

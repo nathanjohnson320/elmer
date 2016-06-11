@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>Mix.Tasks.Elmer.Gen.Cmd – Elmer v0.0.9</title>
+    <title>Mix.Tasks.Elmer.Gen.Cmd – Elmer v0.0.11</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -28,7 +28,7 @@
         Elmer
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.9
+        v0.0.11
       </h2>
     </div>
     
@@ -60,7 +60,7 @@
 
 
       <h1>
-        <small class="visible-xs">Elmer v0.0.9</small>
+        <small class="visible-xs">Elmer v0.0.11</small>
         Mix.Tasks.Elmer.Gen.Cmd
         
         
@@ -129,7 +129,7 @@
     </a>
     <span class="signature">run(args)</span>
       
-      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_cmd.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nathanjohnson320/elmer/blob/master/lib/mix/tasks/gen_cmd.ex#L26" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -140,6 +140,7 @@
 <p>Run with <code class="inline">mix elmer.gen.cmd &lt;module name&gt; &lt;model&gt; &lt;args&gt;</code></p>
 <p>Currently this module is only setup to handle REST Cmds but in the future it will be able to handle multiple types</p>
 <p>Args are in the format “CmdName:Type:RequestType:FuncParams”</p>
+<p>Example: mix elmer.gen.cmd Players Player CreatePlayer:rest:POST:Player</p>
 <ul>
 <li>Type is “rest”, for now
 </li>
