@@ -12,9 +12,9 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
 
   Run with `mix elmer.gen.model <module name> <args>`
 
-  Args are similar to phoenix gen arguments where they are in the format "Model field1:type1 fieldN:typeN"
+  Args are similar to phoenix gen arguments where they are in the format "Model Pluralmodel field1:type1 fieldN:typeN"
 
-  Example: mix elmer.gen.resource Players Player id:integer name:string 
+  Example: mix elmer.gen.edit_view Players Player players name:string level:integer
 
   * Model is the name of the model you want to generate
   * Types will be mapped from elixir (ecto types) to elm
@@ -46,7 +46,6 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
       "Create#{model_name}",
       "Create#{model_name}Success:#{model_name}",
       "Create#{model_name}Error:Http.Error",
-      "Delete#{model_name}Intent:#{model_name}",
       "Delete#{model_name}:Int",
       "Delete#{model_name}Success:#{model_name}",
       "Delete#{model_name}Error:Http.Error",
@@ -72,11 +71,29 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
     ]
     Mix.Task.run "elmer.gen.cmd", cmd_args
 
-    # Update args are the same as msg_args
-    Mix.Task.run "elmer.gen.update", msg_args
+    # Build the update args
+    update_args = [
+      module,
+      "List#{model_name}",
+      "Edit#{model_name}:#{String.downcase model_name}",
+      "FetchAllSuccess:#{String.downcase model_name}s",
+      "FetchAllError:error",
+      "Create#{model_name}",
+      "Create#{model_name}Success:#{String.downcase model_name}",
+      "Create#{model_name}Error:error",
+      "Delete#{model_name}:id",
+      "Delete#{model_name}Success:#{String.downcase model_name}",
+      "Delete#{model_name}Error:error",
+      "Save#{model_name}Success:#{String.downcase model_name}",
+      "Save#{model_name}Error:error"
+    ] ++ Enum.map option_list, fn(model) ->
+      [field, type | _] = String.split(model, ":")
+      "Change#{String.capitalize(field)}:id:value"
+    end
+    Mix.Task.run "elmer.gen.update", update_args
 
     # Now render the views
     Mix.Task.run "elmer.gen.list_view", args
-    
+    Mix.Task.run "elmer.gen.edit_view", args
   end
 end

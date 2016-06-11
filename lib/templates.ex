@@ -131,7 +131,7 @@ import <%= @module_name %>.Msgs exposing (..)
             Http.send Http.defaultSettings config
                 |> Http.fromJson <%= String.downcase(@model) %>Decoder
     in
-        Task.perform CreatePlayerError CreatePlayerSuccess (request)
+        Task.perform <%= cmd["cmd"] %>Error <%= cmd["cmd"] %>Success (request)
 <% end %>
 
 <%= String.downcase(cmd["cmd"]) %>Url : String
