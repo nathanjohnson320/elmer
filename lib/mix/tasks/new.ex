@@ -33,6 +33,16 @@ defmodule Mix.Tasks.Elmer.New do
       * Update.elm
       * View.elm
       * elm-package.json
+  * Hop (https://github.com/sporto/hop) which generates:
+      * Main.elm
+      * Models.elm
+      * Msgs.elm
+      * Ports.elm
+      * RouteMsgs.elm
+      * Routing.Elm
+      * Update.elm
+      * View.elm
+      * elm-package.json
 
   These types correspond to the main types of elm programs.
 
@@ -48,7 +58,7 @@ defmodule Mix.Tasks.Elmer.New do
     case File.mkdir(Path.expand(app_path)) do
       :ok ->
         # Get what type of app this is
-        app_type = Mix.shell.prompt("What type of application is this?\n(B)eginner\n(H)TML\n(N)avigation\n|>")
+        app_type = Mix.shell.prompt("What type of application is this?\n(B)eginner\n(H)TML\n(N)avigation\n(Ho)p\n|>")
 
         # Write the default Main files based on the app type
         create_main(app_path, app_type)
@@ -85,6 +95,16 @@ defmodule Mix.Tasks.Elmer.New do
               {&Elmer.Templates.Navigation.render_update/0, "Update.elm"},
               {&Elmer.Templates.Navigation.render_view/0, "View.elm"},
               {&Elmer.Templates.Navigation.render_package_json/0, "elm-package.json"}
+             ],
+      "ho" => [{&Elmer.Templates.Hop.render_main/0, "Main.elm"},
+              {&Elmer.Templates.Hop.render_models/0, "Models.elm"},
+              {&Elmer.Templates.Hop.render_msgs/0, "Msgs.elm"},
+              {&Elmer.Templates.Hop.render_ports/0, "Ports.elm"},
+              {&Elmer.Templates.Hop.render_routemsgs/0, "RouteMsgs.elm"},
+              {&Elmer.Templates.Hop.render_routing/0, "Routing.elm"},
+              {&Elmer.Templates.Hop.render_update/0, "Update.elm"},
+              {&Elmer.Templates.Hop.render_view/0, "View.elm"},
+              {&Elmer.Templates.Hop.render_package_json/0, "elm-package.json"}
              ]
     }
 

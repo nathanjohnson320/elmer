@@ -13,7 +13,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add elmer to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:elmer, "~> 0.0.10", only: :dev}]
+          [{:elmer, "~> 0.0.12", only: :dev}]
         end
 
 # V1 Roadmap
@@ -26,4 +26,5 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
  - ~~Cmd generator~~
  - ~~Port generator~~
  - ~~Resource generator (Msg, View, Model, Update)~~
+ - ~~Hop generator~~
  - Phoenix resource generator (Resource + phoenix gen.json for API)
