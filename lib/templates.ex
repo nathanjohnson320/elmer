@@ -36,7 +36,7 @@ type alias <%= @model_name %> =
 
 new : <%= @model_name %>
 new =
-<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> : <%= field["default_value"] %>
+<%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>    <%= if index == 0 do %>{<%= else %>,<% end %> <%= field["field"] %> = <%= field["default_value"] %>
 <% end %>    }
 
 
