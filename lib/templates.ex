@@ -101,19 +101,19 @@ update msg model =
 
   def render_cmd do
     """
-module <%= @module_name %>.Cmd exposing (..)
+module <%= @module_name %>.Cmds exposing (..)
 
 import Platform.Cmd as Cmd exposing (..)
 import Http
 import Task
-import <%= @module_name %>.Models exposing (<%= @model %>, collectionDecoder)
+import <%= @module_name %>.Models exposing (<%= @model %>, <%= String.downcase @model %>Decoder)
 import <%= @module_name %>.Msgs exposing (..)
 
 <%= Enum.map @cmds, fn(cmd) -> %>
 <%= String.downcase(cmd["cmd"]) %> : <%= Enum.map cmd["params"], fn(param) -> %><%= param %> -> <% end %>Cmd Msg
 <%= String.downcase(cmd["cmd"])%> <%= Enum.map cmd["params"], fn(param) -> %><%= String.downcase(param) %> <% end %>=
 <%= case cmd["request"] do %>
-<% "GET" -> %>    Task.perform <%= cmd["cmd"] %>Error <%= cmd["cmd"] %>Success (Http.get collectionDecoder <%= String.downcase(cmd["cmd"]) %>Url)
+<% "GET" -> %>    Task.perform <%= cmd["cmd"] %>Error <%= cmd["cmd"] %>Success (Http.get <%= String.downcase @model %>Decoder <%= String.downcase(cmd["cmd"]) %>Url)
 <% _ -> %>    let
         body =
             ""
@@ -170,7 +170,7 @@ import Html.App as App
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 import <%= @module_name %>.Msgs exposing (..)
-import <%= @module_name %>.Models exposing (<%= @model_name %>)
+import <%= @module_name %>.Models exposing (<%= @model_name %>, <%= @model_name %>Id)
 
 
 type alias ViewModel =
@@ -196,7 +196,7 @@ list model =
 <%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>                    <%= if index == 0 do %>[<%= else %>,<% end %> th [] [ text "<%= field["field"] %>" ]
 <% end %>                    ]
                 ]
-            , tbody [] (List.map (<%= String.downcase @model_name %>Row model) model.<%= @model_plural %>)
+            , tbody [] (List.map <%= String.downcase @model_name %>Row model.<%= String.downcase @model_plural %>)
             ]
         ]
 
@@ -207,7 +207,7 @@ list model =
 <%= Enum.map Enum.with_index(@fields), fn({field, index}) -> %>        <%= if index == 0 do %>[<%= else %>,<% end %> td [] [ text <%= String.downcase @model_name %>.<%= field["field"] %> ]
 <% end %>        , td []
             [ editBtn <%= String.downcase @model_name %>
-            , deleteBtn <%= String.downcase @model_name %>
+            , deleteBtn <%= String.downcase @model_name %>.id
             ]
         ]
 
@@ -216,7 +216,7 @@ editBtn : <%= @model_name %> -> Html Msg
 editBtn <%= String.downcase @model_name %> =
     button
         [ class ""
-        , onClick (EditPlayer <%= String.downcase @model_name %>.id)
+        , onClick (Edit<%= @model_name %> <%= String.downcase @model_name %>.id)
         ]
         [ i [ class "" ] [], text "Edit" ]
 
@@ -229,11 +229,11 @@ addBtn model =
         ]
 
 
-deleteBtn : <%= @model_name %> -> Html Msg
-deleteBtn <%= String.downcase @model_name %> =
+deleteBtn : <%= @model_name %>Id -> Html Msg
+deleteBtn id =
     button
         [ class ""
-        , onClick (Delete<%= @model_name %> <%= String.downcase @model_name %>)
+        , onClick (Delete<%= @model_name %> id)
         ]
         [ i [ class "" ] [], text "Delete" ]
 """
@@ -257,10 +257,10 @@ type alias ViewModel =
     , errorMessage : String
     }
 
+onChange : (String -> msg) -> Attribute msg
+onChange val =
+    on "change" (Json.map val targetValue)
 
-onChange : msg -> Attribute msg
-onChange message =
-    on "change" (Json.succeed message)
 
 
 view : ViewModel -> Html Msg
@@ -281,7 +281,7 @@ form model =
 form<%= String.capitalize(field["field"]) %> : ViewModel -> Html Msg
 form<%= String.capitalize(field["field"]) %> model =
     div [ class "" ]
-        [ div [ class "" ] [ text "Name" ]
+        [ div [ class "" ] [ text "<%= String.capitalize(field["field"]) %>" ]
         , div [ class "" ]
             [ input<%= String.capitalize(field["field"]) %> model
             ]

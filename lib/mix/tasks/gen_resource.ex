@@ -50,7 +50,8 @@ defmodule Mix.Tasks.Elmer.Gen.Resource do
       "Delete#{model_name}Success:#{model_name}",
       "Delete#{model_name}Error:Http.Error",
       "Save#{model_name}Success:#{model_name}",
-      "Save#{model_name}Error:Http.Error"
+      "Save#{model_name}Error:Http.Error",
+      "NoOp"
     ] ++ Enum.map option_list, fn(model) ->
       [field, type | _] = String.split(model, ":")
       "Change#{String.capitalize(field)}:Int:#{elm_map[type]}"
